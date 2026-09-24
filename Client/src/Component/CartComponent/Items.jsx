@@ -25,7 +25,7 @@ export const Items = ({ prop ,setLoading}) => {
   const updateQuantity = async (q) => {
  
     const res = await fetch(
-      `http://localhost:9090/cart/addproduct`,
+      `http://localhost:8080/cart/addproduct`,
       {
         method: "POST",
         headers: {

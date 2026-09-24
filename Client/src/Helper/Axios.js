@@ -5,15 +5,15 @@ const axiosFetch = async ({ url, method, data = null }) => {
     // axios.get("dsa", {});
     console.log("error");
     // const token = JSON.parse(sessionStorage.getItem("user") ?? "{}").token;
-    const token = sessionStorage.getItem("token") ?? "{}";
+    const token = sessionStorage.getItem("token");
     console.log(token);
     const response = await axios.request({
-      url: "http://localhost:9090/" + url,
+      url: "http://localhost:8080/" + url,
       method,
       data: data,
-      headers: {
-        Authorization: token ? `Bearer ${token}` : "",
-      },
+      headers: token
+       ? { Authorization: `Bearer ${token}` }
+       :{},
     });
     return response;
   } catch (err) {

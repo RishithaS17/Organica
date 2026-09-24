@@ -71,7 +71,7 @@ public class CartServiceImpl implements CartService {
 
         if(cart==null){
             Cart cart1=new Cart();
-            cart.setUser(user);
+            cart1.setUser(user);
 
             int totalAmount2=0;
 

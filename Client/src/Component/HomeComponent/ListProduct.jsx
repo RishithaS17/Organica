@@ -9,13 +9,21 @@ export const ListProduct = () => {
   const fatchData = async () => {
   
     const response = await axiosFetch({
-      "url":"product/",
-      "method":"GET",
-    });
-    
-    // const
-    console.log(response.data);
+    url: "product/",
+    method: "GET",
+});
+
+console.log("FULL RESPONSE:", response);
+console.log("RESPONSE DATA:", response?.data);
+
+if (Array.isArray(response?.data)) {
     setData(response.data);
+} else if (Array.isArray(response?.data?.data)) {
+    setData(response.data.data);
+} else {
+    console.log("Product data is not an array:", response?.data);
+    setData([]);
+}
   };
 
 
@@ -102,7 +110,7 @@ export const ListProduct = () => {
             </li>
           </ul>
           <ul className="grid-list">
-            {data.map((item) => 
+            {(Array.isArray(data) ? data : []).map((item) =>
 
                <ProductCard key={item.productid} id={item.productid} name={item.productName} description={item.description} price={item.price} img={item.img} />
             

@@ -36,10 +36,10 @@ export const Singup = () => {
   }
 
   const handleSinup = async (e) => {
-    window.location.href = "/login";
+    
     e.preventDefault();
     if (user.password === user.confirmPassword) {
-      const res = await fetch("http://localhost:9090/auth/singup", {
+      const res = await fetch("http://localhost:8080/auth/singup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const Singup = () => {
         onToast("Singup Successfull!!")
         setTimeout(() => {
           window.location.href = "/login";
-        }, 2000);
+        }, 1000);
       } else {
        
           onToast("Something went wrong!!")

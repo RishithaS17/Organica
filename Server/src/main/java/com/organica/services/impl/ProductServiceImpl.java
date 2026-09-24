@@ -54,14 +54,16 @@ public class ProductServiceImpl implements ProductService {
 
     //Read All
     @Override
-    public List<ProductDto> ReadAllProduct() {
-        List<Product> all = this.productRepo.findAll();
+public List<ProductDto> ReadAllProduct() {
+    List<Product> all = this.productRepo.findAll();
 
+    List<ProductDto> collect = all.stream().map(dto -> {
+        dto.setImg(decompressBytes(dto.getImg()));
+        return this.modelMapper.map(dto, ProductDto.class);
+    }).collect(Collectors.toList());
 
-        List<ProductDto> collect = all.stream().map(dto -> new ProductDto(dto.getProductId(), dto.getProductName(), dto.getDescription(), dto.getPrice(), dto.getWeight(), decompressBytes(dto.getImg()))).collect(Collectors.toList());
-
-        return collect;
-    }
+    return collect;
+}
 
     //Delete
     @Override
@@ -119,19 +121,47 @@ public class ProductServiceImpl implements ProductService {
 
     // uncompress the image bytes before returning it to the angular application
     public static byte[] decompressBytes(byte[] data) {
-        Inflater inflater = new Inflater();
-        inflater.setInput(data);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[1024];
-        try {
-            while (!inflater.finished()) {
-                int count = inflater.inflate(buffer);
-                outputStream.write(buffer, 0, count);
-            }
-            outputStream.close();
-        } catch (IOException ioe) {
-        } catch (DataFormatException e) {
-        }
-        return outputStream.toByteArray();
+
+    if (data == null || data.length == 0) {
+        return null;
     }
+
+    // If the data is already a PNG image, return it directly
+    if (data.length >= 8 &&
+        data[0] == (byte) 0x89 &&
+        data[1] == 0x50 &&
+        data[2] == 0x4E &&
+        data[3] == 0x47 &&
+        data[4] == 0x0D &&
+        data[5] == 0x0A &&
+        data[6] == 0x1A &&
+        data[7] == 0x0A) {
+
+        return data;
+    }
+
+    Inflater inflater = new Inflater();
+    inflater.setInput(data);
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    byte[] buffer = new byte[1024];
+
+    try {
+        while (!inflater.finished()) {
+            int count = inflater.inflate(buffer);
+            if (count == 0) {
+                break;
+            }
+            outputStream.write(buffer, 0, count);
+        }
+
+        outputStream.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return data;
+    }
+
+    return outputStream.toByteArray();
+}
 }
