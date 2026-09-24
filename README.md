@@ -1,127 +1,101 @@
-# Organica - Full Stack E-commerce Project
+# Organica – Full-Stack E-Commerce Application
 
-Organica is a full-stack e-commerce project built using Spring Boot, MySQL, and React.js. It handles various operations on the server side, such as managing the shopping cart and other functionalities. For security, it utilizes JWT authentication and authorization using Spring Security.
-
-<a href="https://hits.sh/github.com/vivekkakadiya/Organica"><img alt="Hits" src="https://hits.sh/github.com/vivekkakadiya/Organica.svg?label=Viewer%20Count&color=355C7D&labelColor=4083e9"/></a>
-## Tech Stack
-
-- Backend Framework: Spring Boot
-- Frontend Framework: React.js
-- Database: MySQL
-
-## Prerequisites
-
-To run this project locally, you need to have the following software installed:
-
-- JDK 17
-- Node.js
-- MySQL Server
-- Git
+Organica is a full-stack e-commerce web application designed for
+online shopping and product management. The application provides
+user authentication, product browsing, cart management, and a
+responsive shopping interface.
 
 ## Features
 
-- User authentication and authorization using JWT
-- Product browsing and searching
-- Shopping cart management
-- Order placement and tracking
-- Razorpay Payment integration
+- User Registration and Login
+- JWT-based Authentication
+- Product Listing and Product Details
+- Shopping Cart Management
+- Add and Remove Products from Cart
+- Product Image Handling
+- RESTful APIs
+- MySQL Database Integration
+- Responsive React Frontend
 
-## Getting Started
+## Technology Stack
 
-1. Clone the repository:
+### Frontend
+- React.js
+- JavaScript
+- HTML5
+- CSS3
+- Axios
 
-   ```shell
-   git clone https://github.com/your-username/organica.git
-   cd organica
-   ```
+### Backend
+- Java
+- Spring Boot
+- Spring Security
+- REST APIs
+- JWT Authentication
+- Maven
 
-2. Set up the database:
+### Database
+- MySQL
 
-   - Create a MySQL database and configure the connection details in `backend/src/main/resources/application.properties` file. 
+### Tools
+- Git
+- GitHub
+- Visual Studio Code
 
-3. Application Properties
+## Project Structure
 
-   To configure the application properties, follow these steps:
+Organica/
+│
+├── Client/        # React frontend
+├── Server/        # Spring Boot backend
+├── init/          # Initial project/database resources
+├── docker-compose.yml
+└── README.md
 
-   - Open the `backend/src/main/resources/application.properties` file.
+## Application Architecture
 
-   - Configure the MySQL database connection properties by updating the following lines:
+The application follows a client-server architecture:
 
-     ```
-     spring.datasource.url=jdbc:mysql://localhost:3306/organica
-     spring.datasource.username=your-username
-     spring.datasource.password=your-password
-     ```
+React Frontend → REST API → Spring Boot Backend → MySQL Database
 
-     Replace `your-username` and `your-password` with your MySQL database credentials.
+The frontend communicates with the backend using HTTP requests
+through REST APIs. The Spring Boot backend handles business logic,
+authentication, product management, and cart operations, while
+MySQL stores application data.
 
-  
-   - (Optional) If you want to change the server port, update the following line:
+## Authentication
 
-     ```
-     server.port=8080
-     ```
+The application uses Spring Security with JWT-based authentication.
+Passwords are securely handled using BCrypt password encoding.
 
-     Replace `8080` with the desired port number.
+## Key Functional Modules
 
-   - Save the `application.properties` file.
+### User Management
+- User registration
+- User login
+- Authentication
+- JWT token generation
 
-4. Backend Setup:
+### Product Management
+- Product listing
+- Product details
+- Product image handling
+- Product data retrieval
 
-   - Navigate to the `Server` directory:
+### Cart Management
+- Add products to cart
+- View cart items
+- Remove cart items
+- Cart-related operations
 
-     ```shell
-     cd server
-     ```
+## Future Enhancements
 
-   - Build and run the Spring Boot application:
+- Online payment integration
+- Admin dashboard
+- Order management
+- Product search and filtering
+- Deployment using cloud services
 
-     ```shell
-     ./mvnw spring-boot:run
-     ```
+## Author
 
-   The backend server should now be running on `http://localhost:8080`.
-
-5. Frontend Setup:
-
-   - Navigate to the `Client` directory:
-
-     ```shell
-     cd Client
-     ```
-
-   - Install the dependencies:
-
-     ```shell
-     npm install
-     ```
-
-   - Start the React development server:
-
-     ```shell
-     npm start
-     ```
-
-   The frontend server should now be running on `http://localhost:3000`.
-
-6. Open your web browser and visit `http://localhost:3000` to access the Organica application.
-
-
-## Contributing
-
-Contributions are welcome! If you want to contribute to Organica, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature/bug fix.
-3. Make your changes and commit them.
-4. Push your changes to your forked repository.
-5. Submit a pull request to the main repository.
-
-
-## Contact
-
-If you have any questions or suggestions, feel free to contact the project maintainers:
-
-- Vivek Kakadiya - vivek.kakadiya111@gmail.com
-
-
+Rishitha Reddy
